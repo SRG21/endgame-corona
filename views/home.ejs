@@ -1,12 +1,31 @@
 <html>
-    <head>
-        <title>
-            <%= title %>
-        </title>
-    </head>
-
-    <body>
-        <h1>This is my list</h1>
-    </body>
+<head>
+    <title>
+        <%= title %>
+    </title>
+</head> 
+<body>
+    <h1>The list is here</h1>
     
+    <form action="/addlist" method="POST">
+        <input type="text" name="des" placeholder="Enter the description" required>
+        <input type="text" name="proximity" placeholder="Enter the proximity" required>
+        <input type="text" name="location" placeholder="Enter the location" required>
+        <input type="text" name="date" placeholder="Enter the date" required>
+        <button type="submit">Add to List</button>
+    </form>
+
+    <ul>
+        <% for (let i of detail_list) { %>
+        <li>
+            <p><%= i.des %></p>
+            <p><%= i.proximity %></p>
+            <p><%= i.location %></p>
+            <p><%= i.date %></p>
+            <!--<p><a href="/delete-contact/?phone=<%= i.phone %>">delete</a></p>-->
+            <!--<p><a href="/delete/?id=<%= i._id %>">delete</a></p>-->
+        </li>
+        <% } %>
+    </ul>
+</body>
 </html>

@@ -2,7 +2,7 @@ console.log("Connecting to Database........................");
 
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/To_do_list_development');
+mongoose.connect('mongodb://localhost/list_db');
 
 const db = mongoose.connection;
 
