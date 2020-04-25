@@ -6,9 +6,8 @@ const router = express.Router();
 const homeController = require('../controllers/home-controller');
 
 router.get('/', homeController.home);
-//router.use('/addlist', require('./addlist'));
 router.post('/addlist', homeController.addlist);
-//router.use('/dellist', require('./dellist'));
+router.use('/dellist', homeController.dellist);
 
 console.log("Router Loaded.");
 

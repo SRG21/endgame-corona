@@ -1,11 +1,12 @@
 const express = require('express');
 const port = 8000;
-//const path = require('path');
-const app = express();
-const db = require('./config/mongoose');
-const Detail = require('./models/details');
 
-app.use(express.urlencoded()); // necessary middleware to share data between different pages
+const app = express();
+//const db = require('./config/mongoose');
+//const Detail = require('./models/details');
+
+// AlWAYS REMEMBER TO USE PARSERS BEFORE ROUTES, leads to errors
+app.use(express.urlencoded()); 
 
 //Set up static content
 app.use(express.static('./assets'));

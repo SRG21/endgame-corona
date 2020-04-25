@@ -1,3 +1,4 @@
+const db = require('../config/mongoose');
 const Detail = require('../models/details');
 
 var detailList = [
@@ -36,18 +37,35 @@ module.exports.addlist = function(req,res){
     console.log(req.body);
     
     Detail.create({
-        description: req.body.des,
+        des: req.body.des,
         proximity: req.body.proximity,
         location: req.body.location,
         date: req.body.date
     },function(err, newDetail){
-        if(err){console.log("Error in adding a detail")
-        return;}
+        if(err){
+            console.log(`Error in adding a detail: ${err}`);
+            return;
+        }
 
         console.log("*************",newDetail);
         return res.redirect('back');
     });
 }
 
+module.exports.dellist = function(req,res){
+    
+    console.log(`The the element to be deleted is: ${req.query.id}`);
+
+    let id = req.query.id;
+    
+    Detail.findByIdAndDelete(id, function(err){
+        if(err){
+        console.log(`Error in deleting an object from database: ${err}`);
+        return;
+        }
+
+        return res.redirect('back');
+    });
+}
 
 //module.exports.actionName = function(req,res){}
