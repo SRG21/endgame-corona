@@ -3,17 +3,33 @@
     <title>
         <%= title %>
     </title>
+    <link rel="stylesheet" href="/css/home.css"> <!-- this is automatically searched in assets, hence no need of going to assets-->
 </head> 
 <body>
     <h1>The list is here</h1>
     
-    <form action="/addlist" method="POST">
-        <input type="text" name="des" placeholder="Enter the description" required>
-        <input type="text" name="proximity" placeholder="Enter the proximity" required>
-        <input type="text" name="location" placeholder="Enter the location" required>
-        <input type="text" name="date" placeholder="Enter the date" required>
+    <form action="/addlist" method="POST" id="tracker">
+        <div><input type="text" name="des" placeholder="Enter the description" required></div>
+        <div>
+            <!--<span><input type="text" name="proximity" placeholder="Enter the proximity" required></span>-->
+            <span>
+                <label for="prox">Proximity:</label>
+                <div>
+                <select id="prox" name="proximity" form="tracker">
+                    <option value="Under 2.5m">Under 2.5m</option>
+                    <option value="Between 2.5m and 5m">Between 2.5m and 5m</option>
+                    <option value="Betwen 5m and 7.5m">Betwen 5m and 7.5m</option>
+                    <option value="More than 7.5m">More than 7.5m</option>
+                </select>
+                </div>
+            </span>
+            <span><input type="text" name="date" placeholder="Enter the date" required></span>
+        </div>
+        <div><input type="text" name="location" placeholder="Enter the location" required></div>
         <button type="submit">Add to List</button>
     </form>
+    <p><a id="deletion" href="">Delete</a></p>
+    
 
     <ul>
         <% for (let i of detail_list) { %>
@@ -22,9 +38,11 @@
             <p><%= i.proximity %></p>
             <p><%= i.location %></p>
             <p><%= i.date %></p>
-            <p><a href="/dellist/?id=<%= i._id %>">delete</a></p>
+            <input type="checkbox" name="selection" data-value="<%=i._id %>" class="checkboxes"> 
+            <!--<a href="/dellist/?id=<%= i._id %>"><button>delete</button></a>-->
         </li>
         <% } %>
     </ul>
+    <script type="text/javascript" src="/js/home.js"></script>
 </body>
 </html>

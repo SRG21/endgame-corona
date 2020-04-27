@@ -54,18 +54,47 @@ module.exports.addlist = function(req,res){
 
 module.exports.dellist = function(req,res){
     
-    console.log(`The the element to be deleted is: ${req.query.id}`);
+    //console.log(`The the element to be deleted is: ${req.query.id}`);
+    //console.log(`The link is: ${req}`);
+    let list = new Array();
+    list = req.query.id;
+    let count=0;
+    let ele = new String("");
+    let id_array = new Array();
+    console.log(`The elements to be deleted are: ${list}`);
+    console.log(`the length of array: ${list.length}`);
+    for(let i=0; i< list.length; i++){
+        if(list[i]=="*"){
+            count++;
+            id_array.push(ele);
+            ele = "";
+        }
+        else {
+            ele += list[i].toString();
+        }
+    }
+    console.log(`The no. of ids are: ${count}`);
+    console.log(id_array);
 
-    let id = req.query.id;
     
-    Detail.findByIdAndDelete(id, function(err){
+    for(let j=0; j< id_array.length; j++){
+        let id = id_array[j];
+        Detail.findByIdAndDelete(id, function(err){
+            if(err){
+            console.log(`Error in deleting an object from database: ${err}`);
+            return;
+            }
+        });
+    }
+    return res.redirect('back'); 
+    /*Detail.findByIdAndDelete(id, function(err){
         if(err){
         console.log(`Error in deleting an object from database: ${err}`);
         return;
         }
 
         return res.redirect('back');
-    });
+    });*/
 }
 
 //module.exports.actionName = function(req,res){}
