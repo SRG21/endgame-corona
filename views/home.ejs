@@ -6,43 +6,59 @@
     <link rel="stylesheet" href="/css/home.css"> <!-- this is automatically searched in assets, hence no need of going to assets-->
 </head> 
 <body>
-    <h1>The list is here</h1>
-    
-    <form action="/addlist" method="POST" id="tracker">
-        <div><input type="text" name="des" placeholder="Enter the description" required></div>
-        <div>
-            <!--<span><input type="text" name="proximity" placeholder="Enter the proximity" required></span>-->
-            <span>
-                <label for="prox">Proximity:</label>
-                <div>
-                <select id="prox" name="proximity" form="tracker">
+    <div id="main-list">
+        <div id="form-section">
+            <h1 id="heading"><i class="fas fa-virus-slash"></i> ENDGAME CORONA</h1>
+            <h3>Contact History Tracker For Controlling COVID-19</h3>
+            
+            <form action="/addlist" method="POST" id="tracker">
+            <div class="flex-row flex-main-center size-match-parent"> <!--Row 1 of Form-->
+            <input type="text" name="des" placeholder="Enter the description" required class="big-input">
+            </div>
+            <div class="flex-row flex-space-between size-match-parent"> <!--Row 2 of Form-->
+                
+                <select id="prox" name="proximity" form="tracker" class="small-input">
+                    <option>=========PROXIMITY=========</option>
                     <option value="Under 2.5m">Under 2.5m</option>
                     <option value="Between 2.5m and 5m">Between 2.5m and 5m</option>
                     <option value="Betwen 5m and 7.5m">Betwen 5m and 7.5m</option>
                     <option value="More than 7.5m">More than 7.5m</option>
                 </select>
-                </div>
-            </span>
-            <span><input type="text" name="date" placeholder="Enter the date" required></span>
-        </div>
-        <div><input type="text" name="location" placeholder="Enter the location" required></div>
-        <button type="submit">Add to List</button>
-    </form>
-    <p><a id="deletion" href="">Delete</a></p>
-    
+                
+                <input type="date" name="date" placeholder="Enter the date" required class="small-input">
+            </div>
+            <div class="flex-row flex-main-center size-match-parent"> <!--Row 3 of Form-->
+                <input type="text" name="location" placeholder="Enter the location" required class="big-input">
+            </div>
+            </form>
 
-    <ul>
-        <% for (let i of detail_list) { %>
-        <li>
-            <p><%= i.des %></p>
-            <p><%= i.proximity %></p>
-            <p><%= i.location %></p>
-            <p><%= i.date %></p>
-            <input type="checkbox" name="selection" data-value="<%=i._id %>" class="checkboxes"> 
-            <!--<a href="/dellist/?id=<%= i._id %>"><button>delete</button></a>-->
-        </li>
-        <% } %>
-    </ul>
+            <div id="button-row">
+                <div id="addition" class="switch"><i class="fas fa-plus color-white"></i>   ADD</div>
+                <div><a id="deletion" href="" class=""><div class="switcher"><i class="fas fa-times color-white"></i>   DELETE</div></a></div>
+            </div>
+        </div>
+
+        <div id="list-section" class="flex-cross-center">
+            <!--<ul type="none">-->
+                <% for (let i of detail_list) { %>
+              <!--<li>-->
+                    <div class="list-card flex-column flex-space-evenly">
+                        <div class="flex-row flex-space-between">
+                        <div><input type="checkbox" name="selection" data-value="<%=i._id %>" class="checkboxes"></div>
+                        <div><%= i.des %></div>
+                        <div><%= i.proximity %></div>
+                        </div>
+                        <div class="flex-row flex-space-between">
+                        <p><i class="fas fa-map-marker-alt"></i> <%= i.location %></p>
+                        <p><i class="fas fa-calendar-alt"></i> <%= i.date %></p>
+                        </div>
+                    </div>
+                <!--</li>-->
+                <% } %>
+           <!--</ul>-->
+        </div>
+    </div>
     <script type="text/javascript" src="/js/home.js"></script>
+    <script src="https://kit.fontawesome.com/def22ec775.js" crossorigin="anonymous"></script>
 </body>
 </html>

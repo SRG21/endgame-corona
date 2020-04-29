@@ -1,7 +1,10 @@
-console.log(`chal gya hai apun frontend mein bhi..........!`);
+console.log("Script Loaded........................................................");
 
 var buttons = document.getElementsByClassName("checkboxes");
 var deletion = document.getElementById("deletion");
+var addition = document.getElementById("addition");
+var tracker = document.getElementById("tracker");
+
 var array = new Array();
 
 for( var i=0; i < buttons.length; i++){
@@ -32,12 +35,10 @@ deletion.addEventListener('click', function(){
         link += value + plus;
     }
     console.log(`The link is: ${link}`);
-
-    /*var value = array.pop();
-    var link = "/dellist/?id="+value;*/
-    deletion.setAttribute("href", link);
     
-    /*if(array.length!=0){
-       deletion.click();
-    }*/
+    deletion.setAttribute("href", link);
+});
+
+addition.addEventListener('click', function(){
+    tracker.submit();
 });

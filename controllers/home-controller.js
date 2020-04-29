@@ -1,41 +1,38 @@
-const db = require('../config/mongoose');
-const Detail = require('../models/details');
+const db = require('../config/mongoose'); // loads database odm
+const Detail = require('../models/details'); // loads database schema
 
-var detailList = [
+var detailList = [ // Sample Data
     {
         des: "Vegetable Vendor",
-        proximity:"under 1.5 m",
+        proximity:"under 2.5 m",
         location:"biswamil chowk",
         date: "21/04/20"
     },
 
     {
         des: "Rahul my friend",
-        proximity:" from 1.5 to 3m",
+        proximity:" between 2.5 and 5m",
         location:"apts",
         date: "22/04/20"
     }
 ]
 
-module.exports.home = function(req,res){
+/***************************************** HOME-PAGE CONTROLLER*************************************************/
+module.exports.home = function(req,res){ // renders  the home page
     Detail.find({}, function(err, detailing){
         if(err){
             console.log(`Error in fetching details from DB: ${err}`);
         }
 
         return res.render('home',{
-            title: "yeh meri list!",
+            title: "Contacts Tracker for Covid-19 Control!",
             detail_list: detailing
         })
     });
 }
 
-
-module.exports.addlist = function(req,res){
-    console.log("apan a gya");
-    console.log(detailList);
-    console.log(req.body);
-    
+/***************************************** ADDITION CONTROLLER*************************************************/
+module.exports.addlist = function(req,res){ // Adds Contact to the List
     Detail.create({
         des: req.body.des,
         proximity: req.body.proximity,
@@ -47,24 +44,23 @@ module.exports.addlist = function(req,res){
             return;
         }
 
-        console.log("*************",newDetail);
+        console.log("Added to Database: ",newDetail);
         return res.redirect('back');
     });
 }
 
-module.exports.dellist = function(req,res){
+/***************************************** DELETION CONTROLLER*************************************************/
+
+module.exports.dellist = function(req,res){ // Deletes the selected contacts from the List
     
-    //console.log(`The the element to be deleted is: ${req.query.id}`);
-    //console.log(`The link is: ${req}`);
-    let list = new Array();
+    let list = new Array(); // array to store the request 
     list = req.query.id;
     let count=0;
-    let ele = new String("");
-    let id_array = new Array();
-    console.log(`The elements to be deleted are: ${list}`);
-    console.log(`the length of array: ${list.length}`);
-    for(let i=0; i< list.length; i++){
-        if(list[i]=="*"){
+    let ele = new String(""); // filters out an ID from the request made
+    let id_array = new Array(); // stores all the object ids that are to be deleted
+
+    for(let i=0; i< list.length; i++){ 
+        if(list[i]=="*"){ // * acts as a separator between 2 ids
             count++;
             id_array.push(ele);
             ele = "";
@@ -73,8 +69,7 @@ module.exports.dellist = function(req,res){
             ele += list[i].toString();
         }
     }
-    console.log(`The no. of ids are: ${count}`);
-    console.log(id_array);
+    console.log(`The no. of contacts to be deleted are: ${count}`);
 
     
     for(let j=0; j< id_array.length; j++){
@@ -84,17 +79,14 @@ module.exports.dellist = function(req,res){
             console.log(`Error in deleting an object from database: ${err}`);
             return;
             }
+            console.log(`Deleted: ${id}`);
         });
     }
-    return res.redirect('back'); 
-    /*Detail.findByIdAndDelete(id, function(err){
-        if(err){
-        console.log(`Error in deleting an object from database: ${err}`);
-        return;
+        function redir(){ // function to redirect back
+        return res.redirect('back');
         }
 
-        return res.redirect('back');
-    });*/
+        this.setTimeout(redir, 1000); // used to provide a delay otherwise there occurs some garbage values on home page at times
 }
 
 //module.exports.actionName = function(req,res){}
