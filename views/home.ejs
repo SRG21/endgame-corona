@@ -7,7 +7,9 @@
     <link rel="stylesheet" href="/css/home.css"> <!-- this is automatically searched in assets, hence no need of going to assets-->
 </head> 
 <body>
+    <!--Main Section of the List, divided in 2 sub-sections-->
     <div id="main-list">
+        <!--1st sub section-->
         <div id="form-section">
             <h1 id="heading"><i class="fas fa-virus-slash"></i> ENDGAME CORONA</h1>
             <h3>Contact History Tracker For Controlling COVID-19</h3>
@@ -37,11 +39,11 @@
                 </div>
             </form>
         </div>
-
+    <!--Second Sub-section-->
         <div id="list-section" class="flex-cross-center">
-            <!--<ul type="none">-->
+            <!--Loop to pick data from database and display entries-->
                 <% for (let i of detail_list) { %>
-              <!--<li>-->
+            
                     <div class="list-card flex-column flex-space-evenly">
                         <div class="flex-row flex-space-between">
                             <div><input type="checkbox" name="selection" data-value="<%=i._id %>" class="checkboxes"></div>
@@ -61,11 +63,11 @@
                             <div><i class="fas fa-map-marker-alt font-icon"></i> <%= i.location %></div>   
                         </div>
                     </div>
-                <!--</li>-->
                 <% } %>
-           <!--</ul>-->
+        
         </div>
     </div>
+    <!--All of the required scripts in front-end-->
     <script type="text/javascript" src="/js/home.js"></script>
     <script src="https://kit.fontawesome.com/def22ec775.js" crossorigin="anonymous"></script>
 </body>

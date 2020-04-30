@@ -10,6 +10,7 @@ var selected = document.getElementById("prox");
 
 var array = new Array();
 
+/****************Identifies the checkboxes*********/
 for( var i=0; i < buttons.length; i++){
     let checked = 0;
     buttons[i].addEventListener('click', function(){
@@ -29,6 +30,8 @@ for( var i=0; i < buttons.length; i++){
     });
 }
 
+/**************Listens the delete button******************/
+
 deletion.addEventListener('click', function(){
     console.log(`The checkboxes that will be deleted are ${array}`);
     var link = "/dellist/?id=";
@@ -44,7 +47,7 @@ deletion.addEventListener('click', function(){
     alert(array.length+" Contacts will be deleted from record");
 });
 
-
+/***********************Listens the Add Button*********/
 
 addition.addEventListener('click', function(){
     for(let i=0; i<inputs.length; i++){
@@ -64,14 +67,6 @@ addition.addEventListener('click', function(){
         return;
     }
 
-    tracker.submit();
+    tracker.submit(); // form submit
     alert("Your contacts history will be updated");
 });
-
-function proxColor(){
-    if(selected.value == "Under 2.5m"){
-        selected.style.backgroundColor = "red";
-    }
-}
-
-proxColor();

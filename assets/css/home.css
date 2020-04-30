@@ -59,6 +59,8 @@ select{
     color: white;
 }
 /**********************************************************************/
+
+/*******************Major Functionality Classes************************/
 #main-list{
     display:flex;
     flex-direction: column;
@@ -193,6 +195,8 @@ a > .switcher{
     height: 3vh;
 }
 
+/*********************** Clases to define colour of proximity*****************************/
+
 .prox-class-red{
     background-color: red;
     color: white;
@@ -220,6 +224,8 @@ a > .switcher{
     font-size: 1.3vw;
     padding: 1%; 
 }
+
+/**********************************************************************************************/
 
 .marginer{
     margin-top: 2%;
