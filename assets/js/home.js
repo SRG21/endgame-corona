@@ -4,6 +4,9 @@ var buttons = document.getElementsByClassName("checkboxes");
 var deletion = document.getElementById("deletion");
 var addition = document.getElementById("addition");
 var tracker = document.getElementById("tracker");
+var inputs = document.getElementsByTagName("input");
+var selected = document.getElementById("prox");
+
 
 var array = new Array();
 
@@ -37,8 +40,38 @@ deletion.addEventListener('click', function(){
     console.log(`The link is: ${link}`);
     
     deletion.setAttribute("href", link);
+
+    alert(array.length+" Contacts will be deleted from record");
 });
 
+
+
 addition.addEventListener('click', function(){
+    for(let i=0; i<inputs.length; i++){
+        if(inputs[i].value.length == 0){
+            if(inputs[i].name == "des"){
+                alert("Description is unfilled");
+            }
+            else{
+            alert(inputs[i].name+" is unfilled");
+            }
+
+            return;
+        }
+    }
+    if(selected.value == "nil"){
+        alert("Please select an option");
+        return;
+    }
+
     tracker.submit();
+    alert("Your contacts history will be updated");
 });
+
+function proxColor(){
+    if(selected.value == "Under 2.5m"){
+        selected.style.backgroundColor = "red";
+    }
+}
+
+proxColor();

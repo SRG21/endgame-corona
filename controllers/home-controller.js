@@ -31,6 +31,8 @@ module.exports.home = function(req,res){ // renders  the home page
     });
 }
 
+
+
 /***************************************** ADDITION CONTROLLER*************************************************/
 module.exports.addlist = function(req,res){ // Adds Contact to the List
     Detail.create({

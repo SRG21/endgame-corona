@@ -3,6 +3,7 @@
     <title>
         <%= title %>
     </title>
+    <link rel="shortcut icon" type="image/x-icon" href="/img/Es.png">
     <link rel="stylesheet" href="/css/home.css"> <!-- this is automatically searched in assets, hence no need of going to assets-->
 </head> 
 <body>
@@ -12,30 +13,29 @@
             <h3>Contact History Tracker For Controlling COVID-19</h3>
             
             <form action="/addlist" method="POST" id="tracker">
-            <div class="flex-row flex-main-center size-match-parent"> <!--Row 1 of Form-->
-            <input type="text" name="des" placeholder="Enter the description" required class="big-input">
-            </div>
-            <div class="flex-row flex-space-between size-match-parent"> <!--Row 2 of Form-->
+                <div class="flex-row flex-main-center size-match-parent"> <!--Row 1 of Form-->
+                    <input type="text" name="des" placeholder="Enter the description of incident/ name of person(s)/ identifiers" class="big-input" required>
+                </div>
+                <div class="flex-row flex-space-between size-match-parent"> <!--Row 2 of Form-->
                 
-                <select id="prox" name="proximity" form="tracker" class="small-input">
-                    <option>=========PROXIMITY=========</option>
-                    <option value="Under 2.5m">Under 2.5m</option>
-                    <option value="Between 2.5m and 5m">Between 2.5m and 5m</option>
-                    <option value="Betwen 5m and 7.5m">Betwen 5m and 7.5m</option>
-                    <option value="More than 7.5m">More than 7.5m</option>
-                </select>
+                    <select id="prox" name="proximity" form="tracker" class="small-input" required>
+                        <option value="nil">=========PROXIMITY=========</option>
+                        <option value="Under 2.5m">Under 2.5m</option>
+                        <option value="Between 2.5m and 5m">Between 2.5m and 5m</option>
+                        <option value="Betwen 5m and 7.5m">Betwen 5m and 7.5m</option>
+                        <option value="More than 7.5m">More than 7.5m</option>
+                    </select>
                 
-                <input type="date" name="date" placeholder="Enter the date" required class="small-input">
-            </div>
-            <div class="flex-row flex-main-center size-match-parent"> <!--Row 3 of Form-->
-                <input type="text" name="location" placeholder="Enter the location" required class="big-input">
-            </div>
+                    <input type="date" name="date" placeholder="Enter the date" class="small-input" required >
+                </div>
+                <div class="flex-row flex-main-center size-match-parent" required> <!--Row 3 of Form-->
+                    <input type="text" name="location" placeholder="Enter the location" class="big-input" required>
+                </div>
+                <div id="button-row">
+                    <div id="addition" class="switch" form="tracker"><i class="fas fa-plus color-white"></i>   ADD</div>
+                    <div><a id="deletion" href=""><div class="switcher"><i class="fas fa-times color-white"></i>   DELETE</div></a></div>
+                </div>
             </form>
-
-            <div id="button-row">
-                <div id="addition" class="switch"><i class="fas fa-plus color-white"></i>   ADD</div>
-                <div><a id="deletion" href="" class=""><div class="switcher"><i class="fas fa-times color-white"></i>   DELETE</div></a></div>
-            </div>
         </div>
 
         <div id="list-section" class="flex-cross-center">
@@ -44,13 +44,21 @@
               <!--<li>-->
                     <div class="list-card flex-column flex-space-evenly">
                         <div class="flex-row flex-space-between">
-                        <div><input type="checkbox" name="selection" data-value="<%=i._id %>" class="checkboxes"></div>
-                        <div><%= i.des %></div>
-                        <div><%= i.proximity %></div>
+                            <div><input type="checkbox" name="selection" data-value="<%=i._id %>" class="checkboxes"></div>
+                            <div class="description-class"><%= i.des %></div>
+                            <% if (i.proximity == "Under 2.5m") { %>
+                                <div class="prox-class-red"><%= i.proximity %></div>
+                            <% } else if (i.proximity == "Between 2.5m and 5m") { %>
+                                <div class="prox-class-crimsom"><%= i.proximity %></div>
+                            <% } else if (i.proximity == "Betwen 5m and 7.5m") { %>
+                                <div class="prox-class-purple"><%= i.proximity %></div>
+                            <% } else { %>
+                                <div class="prox-class-yellow"><%= i.proximity %></div>
+                            <% } %>
                         </div>
-                        <div class="flex-row flex-space-between">
-                        <p><i class="fas fa-map-marker-alt"></i> <%= i.location %></p>
-                        <p><i class="fas fa-calendar-alt"></i> <%= i.date %></p>
+                        <div class="flex-row flex-space-between marginer">
+                            <div><i class="fas fa-calendar-alt date-icon"></i> <%= i.date %></div>
+                            <div><i class="fas fa-map-marker-alt font-icon"></i> <%= i.location %></div>   
                         </div>
                     </div>
                 <!--</li>-->
